@@ -1,10 +1,10 @@
-# ai-pet-travel-frontend
+# AI Pet Travel Frontend
 
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_ai-pet-travel-frontend&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=DEFRA_ai-pet-travel-frontend)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_ai-pet-travel-frontend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=DEFRA_ai-pet-travel-frontend)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_ai-pet-travel-frontend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=DEFRA_ai-pet-travel-frontend)
 
-Core delivery platform Node.js Frontend Template.
+AI-powered chatbot service to help people understand the requirements and procedures for taking their pets (dogs, cats, ferrets) abroad. Based on official UK government guidance from GOV.UK and DEFRA regulations.
 
 - [Requirements](#requirements)
   - [Node.js](#nodejs)

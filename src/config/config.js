@@ -219,6 +219,12 @@ export const config = convict({
       default: 'x-cdp-request-id',
       env: 'TRACING_HEADER'
     }
+  },
+  chatApiUrl: {
+    doc: 'Chat API base URL',
+    format: String,
+    default: 'http://localhost:8086',
+    env: 'API_BASE_URL'
   }
 })
 

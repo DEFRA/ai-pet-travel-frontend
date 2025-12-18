@@ -9,6 +9,11 @@ export function buildNavigation(request) {
       text: 'About',
       href: '/about',
       current: request?.path === '/about'
+    },
+    {
+      text: 'Feedback',
+      href: '/feedback',
+      current: request?.path === '/feedback'
     }
   ]
 }

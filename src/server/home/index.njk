@@ -1,17 +1,123 @@
 {% extends 'layouts/page.njk' %}
 
-{% block content %}
-  {{ appHeading({
-    text: heading,
-    caption: "ai-pet-travel-frontend"
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "model-select/macro.njk" import defraModelSelect %}
+
+{% block beforeContent %}
+  {{ govukPhaseBanner({
+    tag: {
+      text: phaseTag
+    },
+    html: phaseTagText
   }) }}
+{% endblock %}
+
+{% block content %}
+
+  <a class="govuk-skip-link" href="#question-form">Skip to question entry</a>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <div class="govuk-body" data-testid="app-page-body">
-        <p></p>
+      {{ appHeading({ text: heading }) }}
+
+      {% if error %}
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: [
+            {
+              text: error,
+              href: "#question"
+            }
+          ]
+        }) }}
+      {% endif %}
+
+      <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+          <span class="govuk-warning-text__assistive">Important:</span>
+          This tool uses generative AI. Answers may be incomplete or inaccurate.
+          Always verify travel requirements with official government guidance and your veterinarian.
+          <a class="govuk-link" href="/how-we-generate-answers" target="_blank" rel="noopener">Find out how this AI works</a>.
+        </strong>
+      </div>
+
+      <div id="question-form">
+        <form action="/chat" method="post" novalidate>
+          {% set textareaOptions = {
+            name: "question",
+            id: "question",
+            value: question,
+            label: {
+              text: "What would you like to know about taking your pet abroad?",
+              classes: "govuk-label--m"
+            },
+            hint: {
+              text: "Enter a specific question, for example 'What vaccinations does my dog need to travel to France?' or 'How do I get a pet health certificate?'"
+            },
+            attributes: {
+              "data-testid": "question-input"
+            },
+            rows: 3
+          } %}
+
+          {% if error %}
+            {% set textareaOptions = {
+              name: "question",
+              id: "question",
+              value: question,
+              label: {
+                text: "What would you like to know about taking your pet abroad?",
+                classes: "govuk-label--m"
+              },
+              hint: {
+                text: "Enter a specific question, for example 'What vaccinations does my dog need to travel to France?' or 'How do I get a pet health certificate?'"
+              },
+              attributes: {
+                "data-testid": "question-input"
+              },
+              rows: 3,
+              errorMessage: {
+                text: error
+              }
+            } %}
+          {% endif %}
+
+          {{ govukTextarea(textareaOptions) }}
+
+          {{ govukButton({
+            text: "Get travel advice",
+            type: "submit",
+            attributes: {
+              "data-testid": "submit-question"
+            }
+          }) }}
+
+          {{ defraModelSelect({
+                    models: models,
+                    modelName: modelName
+            }) }}
+        </form>
+      </div>
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <div class="govuk-body">
+        <h3 class="govuk-heading-s">Popular topics</h3>
+        <p class="govuk-body">Select a topic to prefill your question:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li><a class="govuk-link" href="?question=What%20vaccinations%20does%20my%20dog%20need%20to%20travel%20to%20Europe?">Vaccinations for EU travel</a></li>
+          <li><a class="govuk-link" href="?question=How%20do%20I%20get%20a%20pet%20health%20certificate?">Getting a health certificate</a></li>
+          <li><a class="govuk-link" href="?question=When%20does%20my%20dog%20need%20tapeworm%20treatment?">Tapeworm treatment requirements</a></li>
+          <li><a class="govuk-link" href="?question=What%20are%20the%20microchipping%20requirements%20for%20pet%20travel?">Microchipping requirements</a></li>
+          <li><a class="govuk-link" href="?question=How%20do%20I%20bring%20my%20pet%20back%20to%20the%20UK?">Returning to the UK</a></li>
+        </ul>
       </div>
     </div>
   </div>
 
 {% endblock %}
+

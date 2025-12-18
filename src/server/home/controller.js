@@ -1,12 +1,18 @@
-/**
- * A GDS styled example home page controller.
- * Provided as an example, remove or modify as required.
- */
+import { getModels } from '../chat/models-api.js'
+
 export const homeController = {
-  handler(_request, h) {
-    return h.view('home/index', {
-      pageTitle: 'Home',
-      heading: 'Home'
-    })
+  get: {
+    handler: async (request, h) => {
+      const models = await getModels()
+
+      return h.view('home/index', {
+        pageTitle: 'Pet Travel Advice - Taking Your Pet Abroad',
+        heading: 'Get Pet Travel Advice',
+        phaseTag: 'Beta',
+        phaseTagText:
+          'This is a new service – your feedback will help us to improve it.',
+        models
+      })
+    }
   }
 }

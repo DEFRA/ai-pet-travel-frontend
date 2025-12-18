@@ -1,18 +1,156 @@
 {% extends 'layouts/page.njk' %}
 
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
+
+{% block beforeContent %}
+  {{ govukPhaseBanner({
+    tag: {
+      text: phaseTag
+    },
+    html: 'This is a new service – your <a class="govuk-link" href="mailto:pet-travel-feedback@defra.gov.uk">feedback</a> will help us to improve it.'
+  }) }}
+{% endblock %}
+
 {% block content %}
   {{ appHeading({
     text: heading,
-    caption: "ai-pet-travel-frontend"
+    caption: "AI-powered assistance for taking your pet abroad"
   }) }}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <div class="govuk-body" data-testid="app-page-body">
-        <p>
+      
+      <h2 class="govuk-heading-l">What this service does</h2>
+      
+      <p class="govuk-body-l">
+        The Pet Travel Advice service helps pet owners understand the requirements and procedures for taking their dogs, cats, or ferrets abroad.
+      </p>
+      
+      <p class="govuk-body">
+        Instead of searching through multiple government websites, you can ask questions in natural language and get clear, relevant answers based on official UK government guidance for pet travel.
+      </p>
+
+      {{ govukInsetText({
+        html: 'This service provides information based on official UK government guidance for pet travel, including GOV.UK pages and DEFRA regulations.'
+      }) }}
+
+      <h2 class="govuk-heading-l">How it works</h2>
+      
+      <ol class="govuk-list govuk-list--number">
+        <li>Ask your question about taking your pet abroad</li>
+        <li>Our AI system provides answers based on official UK government pet travel guidance</li>
+        <li>You receive relevant information with links to the original government sources</li>
+        <li>All results are based on official GOV.UK guidance and DEFRA regulations</li>
+      </ol>
+
+      <h2 class="govuk-heading-l">What you can get help with</h2>
+      
+      <h3 class="govuk-heading-m">Travel requirements and documentation</h3>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Pet passports and animal health certificates</li>
+        <li>Vaccination requirements including rabies</li>
+        <li>Microchipping regulations and timing</li>
+        <li>Entry points and border control procedures</li>
+      </ul>
+
+      <h3 class="govuk-heading-m">Country-specific guidance</h3>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>EU country travel requirements</li>
+        <li>Northern Ireland travel procedures</li>
+        <li>Non-EU country regulations</li>
+        <li>Return journey requirements to Great Britain</li>
+      </ul>
+
+      <h3 class="govuk-heading-m">Health treatments and special circumstances</h3>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Tapeworm treatment requirements for dogs</li>
+        <li>Travelling with more than 5 pets</li>
+        <li>Assistance dog travel procedures</li>
+        <li>Commercial and non-commercial travel differences</li>
+      </ul>
+
+      {{ govukWarningText({
+        text: "Always verify travel requirements with official government guidance and consult your veterinarian before travelling with your pet.",
+        iconFallbackText: "Warning"
+      }) }}
+
+      <h2 class="govuk-heading-l">Information sources</h2>
+      
+      <p class="govuk-body">This service provides information based on official guidance from:</p>
+      
+      {{ govukTable({
+        caption: "Government departments and sources",
+        captionClasses: "govuk-table__caption--s govuk-visually-hidden",
+        head: [
+          {
+            text: "Department/Source"
+          },
+          {
+            text: "Type of content"
+          }
+        ],
+        rows: [
+          [
+            {
+              text: "GOV.UK"
+            },
+            {
+              text: "Official pet travel guidance and requirements"
+            }
+          ],
+          [
+            {
+              text: "DEFRA"
+            },
+            {
+              text: "Animal health regulations and veterinary requirements"
+            }
+          ]
+        ]
+      }) }}
+
+    </div>
+    
+    <div class="govuk-grid-column-one-third">
+      <div class="govuk-body">
+        
+        <h3 class="govuk-heading-s">Contact us</h3>
+        <p class="govuk-body-s">
+          <strong>Email:</strong><br>
+          <a href="mailto:pet-travel-feedback@defra.gov.uk" class="govuk-link">pet-travel-feedback@defra.gov.uk</a>
         </p>
+        
+        <p class="govuk-body-s">
+          For technical support or feedback about this service.
+        </p>
+
+        {{ govukDetails({
+          summaryText: "Service status and updates",
+          html: "
+            <p class='govuk-body-s'>This service is in <strong>beta</strong>. This means:</p>
+            <ul class='govuk-list govuk-list--bullet govuk-body-s'>
+              <li>It's a new service that we're still developing</li>
+              <li>We're regularly adding new features and content</li>
+              <li>There may occasionally be brief interruptions to the service</li>
+              <li>Your feedback helps us improve it</li>
+            </ul>
+          "
+        }) }}
+
+        <h3 class="govuk-heading-s">Related services</h3>
+        <ul class="govuk-list govuk-body-s">
+          <li><a href="https://www.gov.uk/taking-your-pet-abroad" class="govuk-link">Taking your pet abroad - GOV.UK</a></li>
+          <li><a href="https://www.gov.uk/bring-pet-to-great-britain" class="govuk-link">Bringing your pet to Great Britain</a></li>
+          <li><a href="https://www.gov.uk/government/organisations/animal-and-plant-health-agency" class="govuk-link">Animal and Plant Health Agency</a></li>
+        </ul>
+
       </div>
     </div>
+    
   </div>
 
 {% endblock %}

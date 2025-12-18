@@ -58,6 +58,11 @@ describe('context and cache', () => {
               current: false,
               text: 'About',
               href: '/about'
+            },
+            {
+              current: false,
+              text: 'Feedback',
+              href: '/feedback'
             }
           ],
           serviceName: 'ai-pet-travel-frontend',
@@ -147,6 +152,11 @@ describe('context and cache', () => {
               current: false,
               text: 'About',
               href: '/about'
+            },
+            {
+              current: false,
+              text: 'Feedback',
+              href: '/feedback'
             }
           ],
           serviceName: 'ai-pet-travel-frontend',

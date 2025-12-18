@@ -1,19 +1,16 @@
-/**
- * A GDS styled example about page controller.
- * Provided as an example, remove or modify as required.
- */
 export const aboutController = {
   handler(_request, h) {
     return h.view('about/index', {
-      pageTitle: 'About',
-      heading: 'About',
+      pageTitle: 'About this service - Pet Travel Advice',
+      heading: 'About this service',
+      phaseTag: 'Beta',
       breadcrumbs: [
         {
           text: 'Home',
           href: '/'
         },
         {
-          text: 'About'
+          text: 'About this service'
         }
       ]
     })
