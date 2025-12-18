@@ -3,6 +3,7 @@ import { getModels } from '../chat/models-api.js'
 export const homeController = {
   get: {
     handler: async (request, h) => {
+      const question = request.query.question || ''
       const models = await getModels()
 
       return h.view('home/index', {
@@ -11,7 +12,8 @@ export const homeController = {
         phaseTag: 'Beta',
         phaseTagText:
           'This is a new service – your feedback will help us to improve it.',
-        models
+        models,
+        question
       })
     }
   }
